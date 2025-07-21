@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Zimal, My Forever 🐧💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+    }
+    #countdownScreen, #questionScreen, #letterScreen {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      color: #fff; text-align: center;
+      backdrop-filter: blur(5px);
+      padding: 20px;
+    }
+    #countdownScreen {
+      font-family: 'Great Vibes', cursive;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 3em;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #questionForm input, #questionForm select {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff1493;
+    }
+    .animal-img {
+      width: 80px;
+      margin: 10px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .result {
+      font-size: 1.4em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/28/audio_6a524a9f86.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="countdownScreen">
+    <div id="countdownText">Loading the magic... 11:00</div>
+  </div>
+
+  <div id="questionScreen" style="display:none;">
+    <h1>Hey Zimal 💖</h1>
+    <p>Just a few cute questions before the surprise ✨</p>
+    <form id="questionForm">
+      <input type="text" placeholder="What's your name?" required/><br/>
+      <input type="date" placeholder="When do you wanna marry me?" required/><br/>
+      <select>
+        <option>With Condoms</option>
+        <option>Without Condoms</option>
+        <option>Nice try 😉</option>
+      </select><br/>
+      <select>
+        <option>Summer Wedding</option>
+        <option>Winter Wedding</option>
+      </select><br/>
+      <input type="number" placeholder="How many babies? 🐣" /><br/>
+      <button type="submit">Show Results 💌</button>
+    </form>
+    <div class="result" id="answers"></div>
+    <div>
+      <img class="animal-img" src="https://cdn.pixabay.com/photo/2022/01/21/18/55/penguin-6955426_960_720.png"/>
+      <img class="animal-img" src="https://cdn.pixabay.com/photo/2021/02/22/17/19/cat-6040331_960_720.png"/>
+      <img class="animal-img" src="https://cdn.pixabay.com/photo/2017/01/31/21/23/ferret-2029311_960_720.png"/>
+      <img class="animal-img" src="https://cdn.pixabay.com/photo/2020/04/22/11/14/hamster-5075601_960_720.png"/>
+    </div>
+  </div>
+
+  <div id="letterScreen" style="display:none;">
+    <h1>To My Meow, Honey, Snowwhite, Cupcake Queen Zimal 💌</h1>
+    <p style="max-width:700px;">
+      Mere jaan, I love you 3000. From a broken story reply to the strongest bond — you healed me when I was falling apart. <br/><br/>
+      We’ve had fights, tears, and so many ups and downs... but we’re still here, stronger than ever. 🥹💖<br/>
+      You’re my cat, my penguin, my goldfish, my chuuchi. And one day... my wife. 🥺💍<br/><br/>
+      From April 27, 2023... 2 years down, 5 more to go, and I swear that first hug will melt everything. <br/>
+      I wanna hold you forever in my arms. Happy Birthday, meri jaan. 🌸<br/><br/>
+      Yours forever, <br/>— Ali 💕
+    </p>
+  </div>
+
+  <script>
+    const countdownText = document.getElementById('countdownText');
+    const countdownScreen = document.getElementById('countdownScreen');
+    const questionScreen = document.getElementById('questionScreen');
+    const letterScreen = document.getElementById('letterScreen');
+
+    let startHour = 11;
+    let startMinute = 0;
+    let interval = setInterval(() => {
+      if (startHour === 12 && startMinute === 0) {
+        clearInterval(interval);
+        countdownScreen.style.display = "none";
+        questionScreen.style.display = "flex";
+        return;
+      }
+      let formattedMinute = startMinute < 10 ? "0" + startMinute : startMinute;
+      countdownText.innerText = `Magic unlocking... ${startHour}:${formattedMinute}`;
+      startMinute++;
+      if (startMinute === 60) {
+        startHour++;
+        startMinute = 0;
+      }
+    }, 100);
+
+    document.getElementById('questionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      questionScreen.style.display = "none";
+      letterScreen.style.display = "flex";
+      const answers = document.querySelectorAll('#questionForm input, #questionForm select');
+      let response = "";
+      answers.forEach(a => {
+        if (a.value) response += `❤️ ${a.value}<br/>`;
+      });
+      document.getElementById('answers').innerHTML = response;
+    });
+  </script>
+</body>
+</html>
